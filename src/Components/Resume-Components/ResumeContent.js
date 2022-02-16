@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
-export default function ResumeContent() {
+export default function ResumeContent(props) {
   const [isEditName, setIsEditName] = useState(false);
   const [content, setContent] = useState({
     title: "Job 1",
@@ -45,6 +47,11 @@ export default function ResumeContent() {
         onChange={handleChange}
         onDoubleClick={handleClick}
         onKeyPress={handleKey}
+      />
+      <FontAwesomeIcon
+        icon={faCircleXmark}
+        color="red"
+        onClick={props.deleteSelf}
       />
     </div>
   ) : (

@@ -8,20 +8,33 @@ import { useState } from "react";
 
 export default function AsideItem(props) {
   const [contentArray, setContentArray] = useState([
-    <AsideContent key={uniqid()} />,
+    <AsideContent key={uniqid()} deleteSelf={() => deleteAsideContent(0)} />,
   ]);
   function addAsideContent() {
     setContentArray((preContentArray) => [
       ...preContentArray,
-      <AsideContent key={uniqid()} />,
+      <AsideContent
+        key={uniqid()}
+        deleteSelf={() => deleteAsideContent(contentArray.length)}
+      />,
     ]);
+  }
+  function deleteAsideContent(index) {
+    setContentArray((preContentArray) => {
+      preContentArray.splice(index, 1);
+      return [...preContentArray];
+    });
   }
   return (
     <div className="aside-item">
       <AsideHeader />
       {contentArray}
 
-      <FontAwesomeIcon icon={faCircleXmark} color="red" />
+      <FontAwesomeIcon
+        icon={faCircleXmark}
+        color="red"
+        onClick={props.deleteSelf}
+      />
       <FontAwesomeIcon
         icon={faCirclePlus}
         color="green"

@@ -5,12 +5,23 @@ import { useState } from "react";
 import uniqid from "uniqid";
 
 export default function Resume() {
-  const [itemArray, setItemArray] = useState([<ResumeItem key={uniqid()} />]);
+  const [itemArray, setItemArray] = useState([
+    <ResumeItem key={uniqid()} deleteSelf={() => deleteResumeItem(0)} />,
+  ]);
   function addResumeItem() {
     setItemArray((preItemArray) => [
       ...preItemArray,
-      <ResumeItem key={uniqid()} />,
+      <ResumeItem
+        key={uniqid()}
+        deleteSelf={() => deleteResumeItem(itemArray.length)}
+      />,
     ]);
+  }
+  function deleteResumeItem(index) {
+    setItemArray((preItemArray) => {
+      preItemArray.splice(index, 1);
+      return [...preItemArray];
+    });
   }
   return (
     <div className="resume">

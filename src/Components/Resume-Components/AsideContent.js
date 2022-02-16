@@ -55,7 +55,11 @@ export default function AsideContent(props) {
         value={content}
         onChange={handleChange}
       />
-      <FontAwesomeIcon icon={faCircleXmark} color="red" />
+      <FontAwesomeIcon
+        icon={faCircleXmark}
+        color="red"
+        onClick={props.deleteSelf}
+      />
     </div>
   ) : (
     <div>
